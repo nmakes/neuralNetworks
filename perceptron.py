@@ -1,6 +1,7 @@
 from random import randrange
 
-def sign(n): # Classifier
+def sign(n): # A simple linear classifier for the line y=x
+	# modify this to create new classifiers
 	if n>=0:
 		return 1
 	else:
@@ -16,12 +17,15 @@ class Perceptron: # Perceptron class
 
 		'''
 			- weights: Weights corresponding to each input to the perceptron
-			- learningRate: rate at which weights are updated
+			- bias: Bias of the perceptron
+			- weightsLearningRate: rate at which weights are updated
+			- biasLearningRate: rate at which bias is updated
 			- momentum: Controls the momentum of perceptron learning
 		'''
 		self.weights = []
 		self.bias = 10*abs(randnorm())
-		self.learningRate = 0.001
+		self.weightsLearningRate = 0.001
+		self.biasLearningRate = 0.01
 		self.momentum = 0.1;
 
 		'''
@@ -53,8 +57,8 @@ class Perceptron: # Perceptron class
 		error = target - guess
 
 		for i in range(len(self.weights)):
-			self.weights[i] += error * inputs[i] * self.learningRate
-			self.bias += error * self.learningRate
-			# self.weights[i] += error * self.learningRate
+			self.weights[i] += error * inputs[i] * self.weightsLearningRate
+			self.bias += error * self.biasLearningRate
+			# self.weights[i] += error * self.weightsLearningRate
 		
 		
