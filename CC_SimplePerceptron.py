@@ -2,7 +2,7 @@ from perceptron import *
 from gui import *
 
 # Global Variables
-no_examples = 200
+no_examples = 2000
 
 while(True):
 	

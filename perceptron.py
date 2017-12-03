@@ -1,4 +1,5 @@
 from random import randrange
+import helpers
 
 def sign(n): # A simple linear classifier for the line y=x
 	# modify this to create new classifiers
@@ -24,8 +25,8 @@ class Perceptron: # Perceptron class
 		'''
 		self.weights = []
 		self.bias = 10*abs(randnorm())
-		self.weightsLearningRate = 0.001
-		self.biasLearningRate = 0.01
+		self.weightsLearningRate = 0.0001
+		self.biasLearningRate = 0.001
 		self.momentum = 0.1;
 
 		'''
@@ -57,7 +58,16 @@ class Perceptron: # Perceptron class
 		error = target - guess
 
 		for i in range(len(self.weights)):
+			
+			# Experiment 1: Update weights according to how much the outputs differ (error), in what direction the input is (inputs[i])
+			# and a learning rate
 			self.weights[i] += error * inputs[i] * self.weightsLearningRate
+
+			# Experiment 2: Update Update weights according to how much the outputs differ (error), distance of input from line and a learning rate
+			# distFromLine = helpers.mod(helpers.dot(self.weights, inputs))
+			# self.weights[i] += error * distFromLine * self.weightsLearningRate
+
+			# Update bias
 			self.bias += error * self.biasLearningRate
 			# self.weights[i] += error * self.weightsLearningRate
 		
