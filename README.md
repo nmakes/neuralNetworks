@@ -17,4 +17,4 @@ Execute the above to see the perceptron learn.
 |-----------------------|-----------------------------------------------------------|
 |perceptron.py 		|Contains definitions of the perceptron                     |
 |gui.py   		|Contains Point class and graphing functions                |
-|CC_SimplePerceptron	|Used as the driver function to test out the functionalities|
+|CC_SimplePerceptron.py	|Used as the driver function to test out the functionalities|
