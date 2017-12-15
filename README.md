@@ -4,7 +4,7 @@
 
 This project requires python's Tkinter graphics to be imported. You can install turtle using:	
 
-	pip install python-tk
+	sudo apt-get install python-tk
 
 ## Execution
 	python CC_SimplePerceptron.py
