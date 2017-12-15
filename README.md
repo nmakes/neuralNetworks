@@ -2,9 +2,9 @@
 
 ## Dependencies
 
-This project requires python's turtle graphics to be imported. You can install turtle using:	
+This project requires python's Tkinter graphics to be imported. You can install turtle using:	
 
-	pip install turtle
+	pip install python-tk
 
 ## Execution
 	python CC_SimplePerceptron.py
