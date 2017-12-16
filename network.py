@@ -46,8 +46,54 @@ def softsign(x):
 def d_softsign(x):
 	return 1 / ((1 + algebra.abs(x)) ** 2)
 
-def isru(x,a=1):
-	return x / algebra.sqrt()
+def isru(x,a):
+	return x / algebra.sqrt(1 + a*x*x)
+
+def d_isru(x,a):
+	return (1 / algebra.sqrt(1 + a*x*x))**3
+
+def relu(x):
+	if x<0:
+		return 0
+	else:
+		return x
+
+def d_relu(x):
+	if x<0:
+		return 0
+	else:
+		return 1
+
+def leakyRelu(x):
+	if x<0:
+		return 0.01*x
+	else:
+		return x
+
+def d_leakyRelu(x):
+	if x<0:
+		return 0.01
+	else:
+		return 1
+
+def paramRelu(x,a):
+	if x<0:
+		return a*x
+	else:
+		return x
+
+def d_paramRelu(x,a):
+	if x<0:
+		return a
+	else:
+		return 1
+
+def randomRelu(x):
+	if x<0:
+		a = algebra.random()
+		return (a*x, a)
+	else:
+		return x
 
 standard_activation_functions = {
 	'identity': (lambda x: x, lambda x: 1),
