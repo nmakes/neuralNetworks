@@ -95,6 +95,28 @@ def randomRelu(x):
 	else:
 		return x
 
+def d_randomRelu(x,a):
+	if x<0:
+		return a
+	else:
+		return 1
+
+def elu(x,a):
+	if x<0:
+		return a * (algebra.exp(x)-1)
+	else:
+		return x
+
+def d_elu(x,a):
+	if x<0:
+		return elu(x,a) + a
+	else:
+		return 1
+
+def selu(x,a,scale):
+	if x<0:
+		return scale()
+
 standard_activation_functions = {
 	'identity': (lambda x: x, lambda x: 1),
 	'step': (lambda x: 0 if x<0 else 1, lambda x: 0 if x!=0 else None),
