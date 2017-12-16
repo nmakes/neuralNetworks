@@ -1,4 +1,4 @@
-from math import sqrt, pow, exp, arctan, abs
+from math import sqrt, pow, exp, arctan, abs, log, sin, cos
 from random import random
 
 def mult(vec1, vec2):
