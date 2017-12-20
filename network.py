@@ -9,10 +9,11 @@ class Neuron: # Describes the neuron
 		https://github.com/nmakes
 	'''
 
-	def __init__(self, weights=None, bias=None, activation=None):
+	def __init__(self, weights=None, bias=None, activation=None, d_activation=None):
 		self.weights = weights
 		self.bias = bias
 		self.activation = activation
+		self.d_activation = d_activation
 
 
 	# Update weights & bias
@@ -29,13 +30,18 @@ class Neuron: # Describes the neuron
 
 
 	def predict(self, inputs):
+		pass
 
 
+class Layer: # Describes a layer in the network
 
-class layer: # Describes a layer in the network
+	def __init__(self, n_neurons=None, weightsList=None, biasList=None, activation=None, d_activation=None, neurons=None):
+		self.n_neurons = n_neurons
+		self.activation = activation
+		self.d_activation = d_activation
 
-	def __init__(self, neurons=None):
-		self.neurons = neurons
+		if neurons == None:
+			neurons = [Neuron(activation, d_activation)]
 
 
 class network:
