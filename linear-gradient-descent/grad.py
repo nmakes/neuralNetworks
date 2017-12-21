@@ -1,5 +1,7 @@
 from random import random, randrange
-
+import turtle as t
+from math import sqrt
+import config
 
 def random_choose(L):
 
@@ -10,32 +12,140 @@ def random_choose(L):
 	return L[i]
 
 
+class Point:
+
+	def __init__(self, x = None, y = None):
+
+		if y==None:
+			self.y = randrange(config.default_scale)
+		if x==None:
+			self.x = randrange(config.default_scale)
+
+		self.x = x
+		self.y = y
+
+class Line:
+
+	def __init__(self, m=1, c=0, scale=config.default_scale):
+
+		self.m = m
+		self.c = c
+		self.scale = scale
+
+	def f(self, x, shift=0):
+
+		deviation = random_choose([-1,1]) * shift
+		return self.m * x + self.c + deviation
+
+
 class PointGenerator:
 
-	def __init__(self, scale=800, generator={'m':1, 'c':0}, shift=0.02):
+	def __init__(self, scale=config.default_scale, line=Line(1,0), shift=0.02):
 
 		# scale (S) : number of pixels covered as S*S
-		# generator : y = mx + c line about which points will be generated
+		# line : y = mx + c line about which points will be generated
 		# shift (d) : maximum variation in y (fraction of total pixels given in scale) from the generator line for a given x
 
 		self.scale = scale
-		self.generator = generator
+		self.line = line
 		self.shift = shift
 
-
-	def generate(N):
+	def generate(self, N):
 
 		# Generate N points
 
 		points = []
 
-		m = self.generator['m']
-		c = self.generator['c']
-
 		for i in range(N):
 
 			x = random() * self.scale
 			x = int(x)
-			y = m*x + c
-			deviation = random_choose([-1,1]) * self.shift * self.scale
-			points.append()
+			y = line.f(x, self.shift)
+			
+			points.append(Point(x,y))
+
+		return points
+
+
+class GUI:
+
+	def __init__(self, scale = config.default_scale, padding = config.default_padding): # Constructor
+
+		self.scale = scale
+		self.padding = padding
+
+		# Set up turtle cursor
+		t.tracer(1,0)
+		t.speed(0)
+		t.screensize(scale + 2*padding, scale + 2*padding, 'white')
+
+		# t.setup(scale + 2*padding, scale + 2*padding)
+
+		t.setworldcoordinates(-padding,-padding,scale+padding,scale+padding)
+		t.hideturtle()
+
+
+	def plotPoint(self, point, drawColor="Blue"): # plot a point
+		
+		# Go to the position of the point
+		t.penup()
+		t.setposition(point.x, point.y)
+
+		# Set the color
+		t.color(drawColor)
+
+		# Put the point
+		t.pendown()
+		t.pensize(4)
+		t.fd(2)
+		t.penup()
+
+	
+	
+	def plotLine(self, line, drawColor="red", thickness=1, vertical=False):
+		
+		# Draw line
+		t.penup()
+		
+		# Line Color
+		print drawColor
+		t.color(drawColor)
+
+		# Line Thickness
+		t.pensize(thickness)
+
+		# Set the line's Y-intercept
+		t.setposition(0, line.c)
+
+		# Set the second point (last point according to the scale)
+		t.pendown()
+
+		if vertical:
+			t.setposition(0, self.scale)
+		else:
+			t.setposition(self.scale, line.f(self.scale))
+		
+		t.penup()
+
+
+	def plotAxes(self, drawColor="black"):
+
+		# X Axis
+		self.plotLine(Line(0, 0), drawColor, 2)
+
+		# Y Axis
+		self.plotLine(Line(0, 0), drawColor, 2, vertical=True)
+
+
+gui = GUI()
+p = Point(0, 0)
+p2 = Point(config.default_scale, config.default_scale)
+l = Line(1,0)
+
+gui.plotAxes()
+
+gui.plotPoint(p)
+gui.plotPoint(p2)
+gui.plotLine(l)
+
+raw_input()
