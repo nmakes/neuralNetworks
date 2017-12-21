@@ -136,12 +136,35 @@ class GUI:
 		self.plotLine(Line(0, 0), drawColor, 2, vertical=True)
 
 
+class VanillaGradientDescent:
+
+	def __init__(self, name="Unnamed Learning Algorithm"):
+
+		self.name = name
+
+
+	def costFunction(self, predictedList, targetList):
+
+		m = len(predictedList)
+
+		C = 1.0/(2*m)
+		S = 0
+
+		for i in range(m):
+
+
+
+	def train(self, line, inputs)
+
+
+
+
 gui = GUI()
 gui.plotAxes()
 
 p = Point(0, 0)
 p2 = Point(config.default_scale, config.default_scale)
-l = Line(1,0)
+l = Line(0.5,20)
 
 gui.plotPoint(p)
 gui.plotPoint(p2)
