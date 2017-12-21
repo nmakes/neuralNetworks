@@ -34,13 +34,13 @@ class Line:
 
 	def f(self, x, shift=0):
 
-		deviation = random_choose([-1,1]) * shift
+		deviation = random_choose([-1,1]) * shift * self.scale
 		return self.m * x + self.c + deviation
 
 
 class PointGenerator:
 
-	def __init__(self, scale=config.default_scale, line=Line(1,0), shift=0.02):
+	def __init__(self, line=Line(1,0), shift=0.02, scale=config.default_scale):
 
 		# scale (S) : number of pixels covered as S*S
 		# line : y = mx + c line about which points will be generated
@@ -60,7 +60,7 @@ class PointGenerator:
 
 			x = random() * self.scale
 			x = int(x)
-			y = line.f(x, self.shift)
+			y = self.line.f(x, self.shift * random())
 			
 			points.append(Point(x,y))
 
@@ -85,7 +85,7 @@ class GUI:
 		t.hideturtle()
 
 
-	def plotPoint(self, point, drawColor="Blue"): # plot a point
+	def plotPoint(self, point, drawColor="Blue", thickness=3): # plot a point
 		
 		# Go to the position of the point
 		t.penup()
@@ -96,7 +96,7 @@ class GUI:
 
 		# Put the point
 		t.pendown()
-		t.pensize(4)
+		t.pensize(thickness)
 		t.fd(2)
 		t.penup()
 
@@ -108,7 +108,6 @@ class GUI:
 		t.penup()
 		
 		# Line Color
-		print drawColor
 		t.color(drawColor)
 
 		# Line Thickness
@@ -138,14 +137,20 @@ class GUI:
 
 
 gui = GUI()
+gui.plotAxes()
+
 p = Point(0, 0)
 p2 = Point(config.default_scale, config.default_scale)
 l = Line(1,0)
-
-gui.plotAxes()
 
 gui.plotPoint(p)
 gui.plotPoint(p2)
 gui.plotLine(l)
 
-raw_input()
+generator = PointGenerator(l, 0.09)
+points = generator.generate(100)
+
+for P in points:
+	gui.plotPoint(P, 'darkgreen')
+
+raw_input('press enter to quit..')
