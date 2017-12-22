@@ -69,7 +69,7 @@ class PointGenerator:
 
 class GUI:
 
-	def __init__(self, scale = config.default_scale, padding = config.default_padding): # Constructor
+	def __init__(self, center_screen=config.default_center_screen, scale = config.default_scale, padding = config.default_padding): # Constructor
 
 		self.scale = scale
 		self.padding = padding
@@ -80,8 +80,12 @@ class GUI:
 		t.screensize(scale + 2*padding, scale + 2*padding, 'white')
 
 		# t.setup(scale + 2*padding, scale + 2*padding)
+		if center_screen:
+			t.setworldcoordinates(0,0,scale, scale)
+			pass
+		else:
+			t.setworldcoordinates(-padding,-padding,scale+padding,scale+padding)
 
-		t.setworldcoordinates(-padding,-padding,scale+padding,scale+padding)
 		t.hideturtle()
 
 
@@ -151,15 +155,17 @@ class VanillaGradientDescent:
 		S = 0
 
 		for i in range(m):
+			pass
 
 
 
-	def train(self, line, inputs)
+	# def train(self, line, inputs)
 
 
 
+centerScreen=True
 
-gui = GUI()
+gui = GUI(center_screen=centerScreen)
 gui.plotAxes()
 
 p = Point(0, 0)
@@ -176,4 +182,4 @@ points = generator.generate(100)
 for P in points:
 	gui.plotPoint(P, 'darkgreen')
 
-raw_input('press enter to quit..')
+input('press enter to quit..')
