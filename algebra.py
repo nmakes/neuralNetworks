@@ -1,5 +1,5 @@
 from math import sqrt, pow, exp, arctan, abs, log, sin, cos
-from random import random
+from random import random, shuffle
 import numpy as np
 
 def mult(vec1, vec2):
