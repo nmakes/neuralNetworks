@@ -3,7 +3,7 @@ import algebra
 # Standard activation functions
 
 # Identity
-def identity(x):]
+def identity(x):
 	return x
 
 def d_identity(x):

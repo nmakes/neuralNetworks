@@ -13,8 +13,10 @@ Execute the above to see the perceptron learn.
 
 ## File Description
 
-|File     		|Description 						    |
+Inside the folder simple-perceptron
+
+|File     				|Description 						    					|
 |-----------------------|-----------------------------------------------------------|
-|perceptron.py 		|Contains definitions of the perceptron                     |
-|gui.py   		|Contains Point class and graphing functions                |
+|perceptron.py 			|Contains definitions of the perceptron                     |
+|gui.py   				|Contains Point class and graphing functions                |
 |CC_SimplePerceptron.py	|Used as the driver function to test out the functionalities|
